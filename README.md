@@ -282,8 +282,8 @@ CLOUDINARY_API_SECRET=your_api_secret
 ## Clone Repository
 
 ```bash
-git clone https://github.com/prem1kr/TripMind-AI-Gemini-ai-integrated-travel-ticket-pdf-extractor-.git
-cd TripMind-AI-Gemini-ai-integrated-travel-ticket-pdf-extractor-
+git clone https://github.com/prem1kr/ItineraAI---AI-Travel-Itinerary-Generator-MERN-STACK-.git
+cd ItineraAI---AI-Travel-Itinerary-Generator-MERN-STACK-
 ```
 
 ## Install Frontend
