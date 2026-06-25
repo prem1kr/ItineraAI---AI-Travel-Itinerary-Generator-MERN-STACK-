@@ -344,4 +344,4 @@ GET /api/user/profile
 
 **Prem Kumar**
 Full Stack Developer
-Built using MERN Stack + Gemini AI.
+Built using MERN Stack
