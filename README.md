@@ -84,7 +84,6 @@ ItineraAI is a full-stack MERN application that allows users to upload travel bo
 ## AI & OCR
 
 * Google Gemini API
-* OpenAI API (Optional)
 * OCR Processing
 
 ---
