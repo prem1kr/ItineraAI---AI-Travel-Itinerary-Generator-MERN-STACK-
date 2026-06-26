@@ -15,13 +15,5 @@ API.interceptors.request.use((config) => {
   return config;
 }, (error) => Promise.reject(error));
 
-API.interceptors.response.use((response) => response, (error) => {
-  if (error.response?.status === 401) {
-    removeItem("token");
-    window.location.href = "/login";
-  }
-
-  return Promise.reject(error);
-});
 
 export default API;
