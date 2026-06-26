@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getItem, setItem, removeItem } from "../../utils/storage";
+import { getItem, setItem } from "../../utils/storage";
 
 const initialState = {
   user: getItem("user"),
@@ -31,15 +31,9 @@ const authSlice = createSlice({
       state.error = action.payload;
     },
 
-    logout: (state) => {
-      state.user = null;
-      state.token = null;
-      state.error = null;
-      removeItem("user");
-      removeItem("token");
-    },
+  
   },
 });
 
-export const { authStart, authSuccess, authFailure, logout } = authSlice.actions;
+export const { authStart, authSuccess, authFailure } = authSlice.actions;
 export default authSlice.reducer;

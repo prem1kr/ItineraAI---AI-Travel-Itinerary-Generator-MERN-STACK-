@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getItem, removeItem } from "../utils/storage";
+import { getItem} from "../utils/storage";
 
 const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
