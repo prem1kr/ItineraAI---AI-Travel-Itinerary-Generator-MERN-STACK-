@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/auth/LoginForm";
 import { loginUser } from "../services/authService";
 import { authStart, authSuccess, authFailure } from "../redux/slices/authSlice";
-import { showSuccessToast, showErrorToast } from "../utils/toast";
+import { showSuccess, showError } from "../utils/toast";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -19,12 +19,12 @@ const Login = () => {
       })
       );
 
-      showSuccessToast("Login successful");
+      showSuccess("Login successful");
       navigate("/dashboard");
 
     } catch (error) {
       dispatch(authFailure(error.response?.data?.message || "Login failed"));
-      showErrorToast(error.response?.data?.message || "Login failed");
+      showError(error.response?.data?.message || "Login failed");
     }
   };
 

@@ -7,7 +7,7 @@ import ShareModal from "../components/itinerary/ShareModal";
 import DownloadPDF from "../components/itinerary/DownloadPDF";
 import { formatDate, getTripDuration } from "../utils/formatDate";
 import { getItineraryById, shareItinerary } from "../services/itineraryService";
-import { showSuccessToast, showErrorToast } from "../utils/toast";
+import { showSuccess, showError } from "../utils/toast";
 
 const ItineraryDetails = () => {
   const { id } = useParams();
@@ -25,7 +25,7 @@ const ItineraryDetails = () => {
       const response = await getItineraryById(id);
       setItinerary(response.data);
     } catch (error) {
-      showErrorToast(error.response?.data?.message || "Failed to load itinerary");
+      showError(error.response?.data?.message || "Failed to load itinerary");
     } finally {
       setLoading(false);
     }
@@ -36,9 +36,9 @@ const ItineraryDetails = () => {
       const response = await shareItinerary(id);
       setShareLink(response.data.shareUrl);
       setOpen(true);
-      showSuccessToast("Share link generated");
+      showSuccess("Share link generated");
     } catch (error) {
-      showErrorToast(error.response?.data?.message || "Failed to share itinerary");
+      showError(error.response?.data?.message || "Failed to share itinerary");
     }
   };
 

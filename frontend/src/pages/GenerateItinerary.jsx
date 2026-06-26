@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import Loader from "../components/common/Loader";
 import Button from "../components/common/Button";
 import { generateItinerary } from "../services/itineraryService";
-import { generateStart, generateSuccess, generateFailure } from "../redux/slices/itinerarySlice";
-import { showSuccessToast, showErrorToast } from "../utils/toast";
+import { itineraryStart, itinerarySuccess, itineraryFailure } from "../redux/slices/itinerarySlice";
+import { showSuccess, showError } from "../utils/toast";
 
 const GenerateItinerary = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const GenerateItinerary = () => {
   const handleGenerate = async () => {
     try {
       setGenerating(true);
-      dispatch(generateStart());
+      dispatch(itineraryStart());
 
       // Temporary demo data
       // Later this comes from UploadDocument page
@@ -42,13 +42,13 @@ const GenerateItinerary = () => {
       };
 
       const response = await generateItinerary(extractedData);
-      dispatch(generateSuccess(response.data));
-      showSuccessToast("Itinerary generated successfully");
+      dispatch(itinerarySuccess(response.data));
+      showSuccess("Itinerary generated successfully");
       navigate(`/itinerary/${response.data._id}`);
 
     } catch (error) {
-      dispatch(generateFailure(error.response?.data?.message || "Failed to generate itinerary"));
-      showErrorToast(error.response?.data?.message || "Failed to generate itinerary");
+      dispatch(itineraryFailure(error.response?.data?.message || "Failed to generate itinerary"));
+      showError(error.response?.data?.message || "Failed to generate itinerary");
     } finally {
       setGenerating(false);
     }
