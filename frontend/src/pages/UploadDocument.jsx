@@ -37,8 +37,9 @@ const UploadDocument = () => {
         setProgress(uploadProgress);
       });
 
+       console.log(response.data)
       dispatch(uploadSuccess({
-        files: response.data.data,
+        files: response.data,
         extractedData: response.data.map(doc => doc.extractedText),
       }));
 
