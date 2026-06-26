@@ -1,21 +1,26 @@
 import model from "../config/gemini.js";
-import { generateTravelPrompt } from "../utils/aiPrompt.js";
+import { generatePrompt } from "../utils/aiPrompt.js";
+
+const sleep = (ms) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 export const generateAIItinerary = async (parsedData) => {
-  const prompt = generateTravelPrompt(parsedData);
+  const prompt = generatePrompt(parsedData);
+  let lastError;
 
-  for (let attempt = 1; attempt <= 3; attempt++) {
+  for (let i = 1; i <= 3; i++) {
     try {
       const result = await model.generateContent(prompt);
       return result.response.text();
 
     } catch (error) {
-      console.error(`Gemini Attempt ${attempt}:`, error.message);
-      if (attempt === 3) {
-        throw new Error("Gemini AI is currently unavailable. Please try again later.");
+      console.log(`Gemini Attempt ${i}:`, error.message);
+      lastError = error;
+      if (i < 3) {
+        await sleep(3000);
       }
-
-      await new Promise((resolve) => setTimeout(resolve, 2000));
     }
   }
+
+  throw lastError;
 };
