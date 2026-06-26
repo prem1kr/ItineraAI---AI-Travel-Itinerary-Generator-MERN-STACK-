@@ -2,8 +2,9 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
 import Home from "../pages/Home";
-import Login from "../pages/Login.jsx";
+import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
 import UploadDocument from "../pages/UploadDocument";
@@ -17,16 +18,19 @@ const AppRoutes = () => {
   return (
     <Routes>
 
-      {/* PUBLIC ROUTES */}
-
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
       </Route>
 
-      {/* PROTECTED ROUTES */}
+      {/* Public Routes */}
+      <Route element={<PublicRoute />}>
+        <Route element={<MainLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+      </Route>
 
+      {/* Protected Routes */}
       <Route element={<PrivateRoute />}>
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
