@@ -11,9 +11,9 @@ const Profile = () => {
   const fetchProfile = async () => {
     try {
       const profileRes = await getProfile();
-      setUser(profileRes.user);
+      setUser(profileRes.data);
       const itineraryRes = await getItineraries();
-      setTotalTrips(itineraryRes.length);
+      setTotalTrips(itineraryRes.data.length);
     } catch (error) {
       console.error(error);
     } finally {
