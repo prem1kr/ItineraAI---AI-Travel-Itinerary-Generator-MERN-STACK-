@@ -8,7 +8,7 @@ import Button from "../components/common/Button";
 import Loader from "../components/common/Loader";
 import { uploadDocuments } from "../services/uploadService";
 import { uploadStart, uploadSuccess, uploadFailure } from "../redux/slices/uploadSlice";
-import { showSuccessToast, showErrorToast } from "../utils/toast";
+import { showSuccess, showError } from "../utils/toast";
 
 const UploadDocument = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const UploadDocument = () => {
 
   const handleUpload = async () => {
     if (!files.length) {
-      return showErrorToast("Please select at least one document");
+      return showError("Please select at least one document");
     }
 
     try {
@@ -44,12 +44,12 @@ const UploadDocument = () => {
       })
       );
 
-      showSuccessToast("Documents uploaded successfully");
+      showSuccess("Documents uploaded successfully");
       navigate("/generate-itinerary");
 
     } catch (error) {
       dispatch(uploadFailure(error.response?.data?.message || error.message));
-      showErrorToast(error.response?.data?.message || error.message);
+      showError(error.response?.data?.message || error.message);
     } finally {
       setLoading(false);
     }
