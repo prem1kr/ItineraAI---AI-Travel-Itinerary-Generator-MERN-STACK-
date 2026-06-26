@@ -45,7 +45,7 @@ const GenerateItinerary = () => {
       //   ],
       // };
 
-      const response = await generateItinerary(extractedData);
+      const response = await generateItinerary(extractedData.join("\n\n")); 
       dispatch(itinerarySuccess(response.data));
       showSuccess("Itinerary generated successfully");
       navigate(`/itinerary/${response.data._id}`);
