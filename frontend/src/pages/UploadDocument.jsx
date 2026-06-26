@@ -37,10 +37,12 @@ const UploadDocument = () => {
         setProgress(uploadProgress);
       });
 
-       console.log(response.data)
+      console.log("UPLOAD RESPONSE:", response);
+      console.log("UPLOAD RESPONSE DATA:", response.data);
+      console.log("DOCUMENTS:", response.data.data);
       dispatch(uploadSuccess({
-        files: response.data,
-        extractedData: response.data.map(doc => doc.extractedText),
+        files: response.data.data,
+        extractedData: response.data.data.map((doc) => doc.extractedText),
       }));
 
       showSuccess("Documents uploaded successfully");
