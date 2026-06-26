@@ -1,14 +1,18 @@
 import toast from "react-hot-toast";
 
-export const showSuccess = (message) => {
+export const showSuccessToast = (message) => {
   toast.success(message);
 };
 
-export const showError = (message) => {
+export const showErrorToast = (message) => {
   toast.error(message);
 };
 
-export const showLoading = (message) => {
+export const showInfoToast = (message) => {
+  toast(message);
+};
+
+export const showLoadingToast = (message = "Loading...") => {
   return toast.loading(message);
 };
 
