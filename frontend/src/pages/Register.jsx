@@ -2,8 +2,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import RegisterForm from "../components/auth/RegisterForm";
 import { registerUser } from "../services/authService";
-import {authStart,authSuccess,authFailure} from "../redux/slices/authSlice";
-import {showSuccess,showError} from "../utils/toast";
+import { authStart, authSuccess, authFailure } from "../redux/slices/authSlice";
+import { showSuccess, showError } from "../utils/toast";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -16,9 +16,8 @@ const Register = () => {
       dispatch(authSuccess({
         user: response.data.user,
         token: response.data.token,
-      })
-      );
-
+      }));
+      localStorage.setItem("token", response.data.token);
       showSuccess("Account created successfully");
       navigate("/dashboard");
 

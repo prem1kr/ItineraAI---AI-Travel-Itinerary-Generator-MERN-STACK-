@@ -11,11 +11,8 @@ API.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-
   return config;
-},
-  (error) => Promise.reject(error)
-);
+},(error) => Promise.reject(error));
 
 API.interceptors.response.use((response) => response, (error) => {
   if (error.response?.status === 401) {
@@ -24,7 +21,6 @@ API.interceptors.response.use((response) => response, (error) => {
   }
 
   return Promise.reject(error);
-}
-);
+});
 
 export default API;

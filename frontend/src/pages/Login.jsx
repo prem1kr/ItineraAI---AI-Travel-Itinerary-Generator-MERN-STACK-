@@ -16,9 +16,8 @@ const Login = () => {
       dispatch(authSuccess({
         user: response.data.user,
         token: response.data.token,
-      })
-      );
-
+      }));
+      localStorage.setItem("token", response.data.token);
       showSuccess("Login successful");
       navigate("/dashboard");
 
