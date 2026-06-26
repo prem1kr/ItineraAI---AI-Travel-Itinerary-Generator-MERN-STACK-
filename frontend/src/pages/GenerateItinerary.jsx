@@ -11,8 +11,9 @@ const GenerateItinerary = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [generating, setGenerating] = useState(false);
-  const { extractedData } = useSelector((state) => state.upload);
+  const extractedData = useSelector(state => state.upload.extractedData);
 
+  console.log("Redux extractedData:", extractedData);
   const handleGenerate = async () => {
     try {
       setGenerating(true);
