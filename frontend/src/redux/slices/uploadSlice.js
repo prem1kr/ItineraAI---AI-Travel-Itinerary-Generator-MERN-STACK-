@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   files: [],
-  extractedData: "",
+  extractedData: [],
   parsedData: null,
   loading: false,
   error: null,

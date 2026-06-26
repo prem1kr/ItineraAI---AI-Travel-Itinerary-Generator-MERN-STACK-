@@ -10,11 +10,7 @@ export const uploadDocuments = async (files, onUploadProgress) => {
   });
 
   const formData = new FormData();
-
-  files.forEach((file) => {
-    formData.append("documents", file);
-  });
-
+  files.forEach((file) => { formData.append("documents", file); });
   const response = await API.post("/upload", formData,
     {
       headers: {
