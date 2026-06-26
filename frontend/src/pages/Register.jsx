@@ -15,8 +15,8 @@ const Register = () => {
       dispatch(authStart());
       const response = await registerUser(data);
       dispatch(authSuccess({
-        user: response.data.user,
-        token: response.data.token,
+        user: response.user,
+        token: response.token,
       }));
       setItem("token", response.data.token);
       showSuccess("Account created successfully");

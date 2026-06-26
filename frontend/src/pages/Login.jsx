@@ -15,10 +15,11 @@ const Login = () => {
       dispatch(authStart());
       const response = await loginUser(data);
       dispatch(authSuccess({
-        user: response.data.user,
-        token: response.data.token,
+        user: response.user,
+        token: response.token,
       }));
-      setItem("token", response.data.token);
+      setItem("token", response.token);
+      console.log(response.token)
       showSuccess("Login successful");
       navigate("/dashboard");
 
