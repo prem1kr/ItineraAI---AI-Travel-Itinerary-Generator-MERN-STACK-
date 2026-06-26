@@ -1,30 +1,35 @@
-export const generateTravelPrompt = (extractedData) => {
+export const generatePrompt = (extractedData) => {
   return `
-You are an expert travel planner.
+You are a professional travel planner.
 
-Using the travel booking information below, create a complete travel itinerary.
+Analyze the booking information and generate a complete travel itinerary.
 
-Booking Information:
-
+BOOKING DATA:
 ${JSON.stringify(extractedData, null, 2)}
 
-Requirements:
+RULES:
+- Return ONLY valid JSON.
+- Do NOT use markdown.
+- Do NOT wrap response in \`\`\`json.
+- Do NOT add explanations.
+- Do NOT add any text before or after JSON.
+- Include flights, hotels, attractions, and food recommendations.
+- Generate day-wise planning.
 
-1. Generate a day-wise itinerary.
-2. Include flight schedules.
-3. Include hotel check-in/check-out.
-4. Suggest nearby attractions.
-5. Suggest restaurants/local food.
-6. Suggest transportation options.
-7. Return ONLY valid JSON.
-
-Format:
+Return exactly this structure:
 
 {
   "destination": "",
   "startDate": "",
   "endDate": "",
-  "timeline": [],
+  "timeline": [
+    {
+      "type": "flight",
+      "title": "",
+      "time": "",
+      "description": ""
+    }
+  ],
   "days": [
     {
       "day": 1,
@@ -35,8 +40,3 @@ Format:
 }
 `;
 };
-
-export const systemPrompt = `
-You are a professional AI travel itinerary generator.
-Generate accurate travel plans from uploaded booking documents.
-`;
