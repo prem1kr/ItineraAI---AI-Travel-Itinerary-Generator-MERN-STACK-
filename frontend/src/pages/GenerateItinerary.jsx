@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/common/Loader";
 import Button from "../components/common/Button";
 import { generateItinerary } from "../services/itineraryService";
@@ -11,6 +11,7 @@ const GenerateItinerary = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [generating, setGenerating] = useState(false);
+  const { extractedData } = useSelector((state) => state.upload);
 
   const handleGenerate = async () => {
     try {
@@ -19,27 +20,27 @@ const GenerateItinerary = () => {
 
       // Temporary demo data
       // Later this comes from UploadDocument page
-      const extractedData = {
-        destination: "Dubai",
-        startDate: "2026-07-10",
-        endDate: "2026-07-15",
+      // const extractedData = {
+      //   destination: "Dubai",
+      //   startDate: "2026-07-10",
+      //   endDate: "2026-07-15",
 
-        flights: [
-          {
-            from: "Delhi",
-            to: "Dubai",
-            departure:
-              "2026-07-10T08:00:00",
-          },
-        ],
+      //   flights: [
+      //     {
+      //       from: "Delhi",
+      //       to: "Dubai",
+      //       departure:
+      //         "2026-07-10T08:00:00",
+      //     },
+      //   ],
 
-        hotels: [
-          {
-            name:
-              "Atlantis The Palm",
-          },
-        ],
-      };
+      //   hotels: [
+      //     {
+      //       name:
+      //         "Atlantis The Palm",
+      //     },
+      //   ],
+      // };
 
       const response = await generateItinerary(extractedData);
       dispatch(itinerarySuccess(response.data));

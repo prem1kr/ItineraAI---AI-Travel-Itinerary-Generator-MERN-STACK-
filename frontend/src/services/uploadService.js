@@ -4,7 +4,6 @@ import { validateFile } from "../utils/helpers";
 export const uploadDocuments = async (files, onUploadProgress) => {
   files.forEach((file) => {
     const validation = validateFile(file);
-
     if (!validation.valid) {
       throw new Error(validation.message);
     }
@@ -16,22 +15,19 @@ export const uploadDocuments = async (files, onUploadProgress) => {
     formData.append("documents", file);
   });
 
-  const response =
-    await API.post(
-      "/upload",
-      formData,
-      {
-        headers: {
-          "Content-Type":
-            "multipart/form-data",
-        },
+  const response = await API.post("/upload", formData,
+    {
+      headers: {
+        "Content-Type":
+          "multipart/form-data",
+      },
 
-        onUploadProgress: (event) => {
-          const progress = Math.round((event.loaded * 100) / event.total);
-          onUploadProgress?.(progress);
-        },
-      }
-    );
+      onUploadProgress: (event) => {
+        const progress = Math.round((event.loaded * 100) / event.total);
+        onUploadProgress?.(progress);
+      },
+    }
+  );
 
   return response.data;
 };

@@ -38,11 +38,9 @@ const UploadDocument = () => {
       });
 
       dispatch(uploadSuccess({
-        files: response.files,
-        extractedData: response.extractedData,
-        parsedData: response.parsedData,
-      })
-      );
+        files: response.data,
+        extractedData: response.data.map((doc) => doc.extractedText),
+      }));
 
       showSuccess("Documents uploaded successfully");
       navigate("/generate-itinerary");

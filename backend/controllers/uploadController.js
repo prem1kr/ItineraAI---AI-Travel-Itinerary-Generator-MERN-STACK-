@@ -14,7 +14,7 @@ export const uploadDocuments = async (req, res) => {
       }
 
       const document = await uploadDocumentService(file, req.user._id, extractedText);
-      uploadedDocs.push(document);
+      uploadedDocs.push({ ...document.toObject(), extractedText });
     }
 
     successResponse(res, "Documents uploaded successfully", uploadedDocs);
