@@ -38,9 +38,8 @@ const UploadDocument = () => {
       });
 
       dispatch(uploadSuccess({
-        files: response.data,
-        extractedData: response.data.map(doc => doc.extractedText).join("\n\n"),
-        parsedData: null,
+        files: response.data.data,
+        extractedData: response.data.map(doc => doc.extractedText),
       }));
 
       showSuccess("Documents uploaded successfully");
