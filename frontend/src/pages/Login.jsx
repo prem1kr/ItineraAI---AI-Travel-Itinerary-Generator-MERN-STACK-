@@ -19,7 +19,6 @@ const Login = () => {
         token: response.data.token,
       }));
       setItem("token", response.data.token);
-      console.log(response.data.token);
       showSuccess("Login successful");
       navigate("/dashboard");
 

@@ -28,7 +28,7 @@ const Profile = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div >
       <h1 className="text-3xl font-bold mb-6">My Profile</h1>
 
       <div className="bg-white rounded-2xl shadow-md p-8">

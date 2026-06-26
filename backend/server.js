@@ -18,8 +18,7 @@ app.use(cors({ origin: process.env.CLIENT_URL || "*", credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-app.use("/uploads", express.static(path.join(process.cwd(), "src/uploads")));
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 app.use("/api/auth", authRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/itinerary", itineraryRoutes);
