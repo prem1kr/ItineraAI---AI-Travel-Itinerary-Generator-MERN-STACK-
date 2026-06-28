@@ -12,9 +12,7 @@ const GenerateItinerary = () => {
   const dispatch = useDispatch();
   const [generating, setGenerating] = useState(false);
   const extractedData = useSelector((state) => state.upload.extractedData);
-  console.log("extractedData:", extractedData);
-  console.log("type:", typeof extractedData);
-  console.log("isArray:", Array.isArray(extractedData));
+  
 
   const handleGenerate = async () => {
     try {
@@ -44,12 +42,11 @@ const GenerateItinerary = () => {
       //     },
       //   ],
       // };
-      if (!Array.isArray(extractedData)) {
-        console.error("Expected array:", extractedData);
-        return showError("No extracted document data found");
-      }
-      const response = await generateItinerary(
-        extractedData.join("\n\n")); 
+      if (!extractedData || extractedData.trim() === "") {
+  return showError("No extracted document data found");
+}
+
+const response = await generateItinerary(extractedData); 
         dispatch(itinerarySuccess(response.data));
       showSuccess("Itinerary generated successfully");
       navigate(`/itinerary/${response.data._id}`);
