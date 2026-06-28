@@ -40,9 +40,12 @@ const UploadDocument = () => {
 
       const documents = response.data;
 
-      dispatch(uploadSuccess({files: [],
-    extractedData: response.data.extractedText,
-  }));
+   dispatch(
+  uploadSuccess({
+    files: [],
+    extractedData: response.data.data.extractedText,
+  })
+);;
 
       showSuccess("Documents uploaded successfully");
       navigate("/generate-itinerary");
