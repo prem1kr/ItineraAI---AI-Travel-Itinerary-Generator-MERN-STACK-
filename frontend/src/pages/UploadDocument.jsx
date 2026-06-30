@@ -33,32 +33,10 @@ const UploadDocument = () => {
     try {
       setLoading(true);
       dispatch(uploadStart());
-      const response = await uploadDocuments(files, (uploadProgress) => {
-        setProgress(uploadProgress);
-      });
-
-      console.log("response =", response);
-      console.log("response.data =", response.data);
-      console.log("keys =", Object.keys(response.data));
-
-      const documents = response.data;
-
-      console.log("documents.data =", documents.data);
-      console.log("isArray =", Array.isArray(documents.data));
-      console.log("first =", documents.data?.[0]);
-
-      if (!documents.data || !Array.isArray(documents.data)) {
-        console.error("Invalid API response:", documents);
-        return showError("Invalid upload response");
-      }
-
-      dispatch(
-        uploadSuccess({
-          files: documents.data,
-          extractedData: documents.data[0].extractedText,
-          parsedData: documents.data,
-        })
-      ); showSuccess("Documents uploaded successfully");
+      const result = await uploadDocuments(files, (uploadProgress) => { setProgress(uploadProgress) });
+      const uploadedFiles = result.data;
+      dispatch(uploadSuccess({ files: uploadedFiles, extractedData: uploadedFiles[0]?.extractedText || "", parsedData: uploadedFiles, }));
+      showSuccess("Documents uploaded successfully");
       navigate("/generate-itinerary");
 
     } catch (error) {
