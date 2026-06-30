@@ -13,11 +13,13 @@ const GenerateItinerary = () => {
   const [generating, setGenerating] = useState(false);
   const extractedData = useSelector((state) => state.upload.extractedData);
 
-
   const handleGenerate = async () => {
     try {
       setGenerating(true);
       dispatch(itineraryStart());
+      if (!extractedData || extractedData.trim() === "") {
+        return showError("No extracted document data found");
+      }
 
       if (!extractedData || extractedData.trim() === "") {
         return showError("No extracted document data found");
