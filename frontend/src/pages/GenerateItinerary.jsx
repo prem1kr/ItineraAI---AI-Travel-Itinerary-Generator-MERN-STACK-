@@ -12,6 +12,7 @@ const GenerateItinerary = () => {
   const dispatch = useDispatch();
   const [generating, setGenerating] = useState(false);
   const extractedData = useSelector((state) => state.upload.extractedData);
+  console.log(extractedData);
 
   const handleGenerate = async () => {
     try {
