@@ -18,30 +18,6 @@ const GenerateItinerary = () => {
     try {
       setGenerating(true);
       dispatch(itineraryStart());
-
-      // Temporary demo data
-      // Later this comes from UploadDocument page
-      // const extractedData = {
-      //   destination: "Dubai",
-      //   startDate: "2026-07-10",
-      //   endDate: "2026-07-15",
-
-      //   flights: [
-      //     {
-      //       from: "Delhi",
-      //       to: "Dubai",
-      //       departure:
-      //         "2026-07-10T08:00:00",
-      //     },
-      //   ],
-
-      //   hotels: [
-      //     {
-      //       name:
-      //         "Atlantis The Palm",
-      //     },
-      //   ],
-      // };
       if (!extractedData || extractedData.trim() === "") {
   return showError("No extracted document data found");
 }
