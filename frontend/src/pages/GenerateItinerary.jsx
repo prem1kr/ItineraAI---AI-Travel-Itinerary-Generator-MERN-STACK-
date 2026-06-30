@@ -18,11 +18,7 @@ const GenerateItinerary = () => {
     try {
       setGenerating(true);
       dispatch(itineraryStart());
-      if (!extractedData || extractedData.trim() === "") {
-        return showError("No extracted document data found");
-      }
-
-      if (!extractedData || extractedData.trim() === "") {
+      if (!Array.isArray(extractedData) || extractedData.length === 0) {
         return showError("No extracted document data found");
       }
 

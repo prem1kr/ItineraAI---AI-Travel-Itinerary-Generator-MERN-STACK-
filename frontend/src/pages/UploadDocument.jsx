@@ -35,7 +35,7 @@ const UploadDocument = () => {
       dispatch(uploadStart());
       const result = await uploadDocuments(files, (uploadProgress) => { setProgress(uploadProgress) });
       const uploadedFiles = result.data;
-      dispatch(uploadSuccess({ files: uploadedFiles, extractedData: uploadedFiles[0]?.extractedText || "", parsedData: uploadedFiles, }));
+      dispatch(uploadSuccess({ files: uploadedFiles, extractedData: uploadedFiles, parsedData: uploadedFiles }));
       showSuccess("Documents uploaded successfully");
       navigate("/generate-itinerary");
 
