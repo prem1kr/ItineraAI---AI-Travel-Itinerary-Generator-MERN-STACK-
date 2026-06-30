@@ -12,45 +12,19 @@ const GenerateItinerary = () => {
   const dispatch = useDispatch();
   const [generating, setGenerating] = useState(false);
   const extractedData = useSelector((state) => state.upload.extractedData);
-  console.log("extractedData:", extractedData);
-  console.log("type:", typeof extractedData);
-  console.log("isArray:", Array.isArray(extractedData));
+
 
   const handleGenerate = async () => {
     try {
       setGenerating(true);
       dispatch(itineraryStart());
 
-      // Temporary demo data
-      // Later this comes from UploadDocument page
-      // const extractedData = {
-      //   destination: "Dubai",
-      //   startDate: "2026-07-10",
-      //   endDate: "2026-07-15",
-
-      //   flights: [
-      //     {
-      //       from: "Delhi",
-      //       to: "Dubai",
-      //       departure:
-      //         "2026-07-10T08:00:00",
-      //     },
-      //   ],
-
-      //   hotels: [
-      //     {
-      //       name:
-      //         "Atlantis The Palm",
-      //     },
-      //   ],
-      // };
-      if (!Array.isArray(extractedData)) {
-        console.error("Expected array:", extractedData);
+      if (!extractedData || extractedData.trim() === "") {
         return showError("No extracted document data found");
       }
-      const response = await generateItinerary(
-        extractedData.join("\n\n")); 
-        dispatch(itinerarySuccess(response.data));
+
+      const response = await generateItinerary(extractedData);
+      dispatch(itinerarySuccess(response.data));
       showSuccess("Itinerary generated successfully");
       navigate(`/itinerary/${response.data._id}`);
 
