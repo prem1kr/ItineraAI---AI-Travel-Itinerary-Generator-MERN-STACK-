@@ -34,12 +34,8 @@ const UploadDocument = () => {
       setLoading(true);
       dispatch(uploadStart());
       const response = await uploadDocuments(files, (uploadProgress) => { setProgress(uploadProgress); });
-      console.log("UPLOAD RESPONSE:", response);
-      console.log("UPLOAD RESPONSE DATA:", response.data);
-
       const documents = response.data;
-
-      dispatch(uploadSuccess({ files: documents.files, extractedData: documents.data.extractedText }));
+      dispatch(uploadSuccess({ files: documents.data, extractedData: documents.data[0]?.extractedText || "", parsedData: documents.data }));
       showSuccess("Documents uploaded successfully");
       navigate("/generate-itinerary");
 
