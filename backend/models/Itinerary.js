@@ -31,9 +31,13 @@ const itinerarySchema = new mongoose.Schema({
   }],
 
   days: [{
-    day: Number,
-    title: String,
-    activities: [String],
+    day: { type: Number, required: true },
+    title: { type: String, required: true },
+    activities: [{
+      time: { type: String, required: true },
+      event: { type: String, required: true },
+      recommendation: { type: String, default: "" },
+    }]
   }],
 
   aiResponse: {
