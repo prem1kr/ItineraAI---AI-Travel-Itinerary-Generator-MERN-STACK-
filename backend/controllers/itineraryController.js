@@ -12,14 +12,37 @@ export const generateItinerary = async (req, res) => {
     const combinedText = extractedData.map((doc) => doc.extractedText).join("\n\n");
     const aiResponse = await generateAIItinerary(combinedText);
     const cleanedResponse = aiResponse.replace(/```json/g, "").replace(/```/g, "").trim();
+
     const parsed = JSON.parse(cleanedResponse);
+    parsed.days = (parsed.days || []).map((day) => ({
+      ...day,
+      activities: (day.activities || []).map((activity) => {
+        if (typeof activity === "string") {
+          const [time, ...rest] = activity.split(":");
+          return {
+            time: time?.trim() || "",
+            event: rest.join(":").trim(),
+            recommendation: "",
+          };
+        }
+        return {
+          time: activity.time || "",
+          event: activity.event || "",
+          recommendation: activity.recommendation || "",
+        };
+      }),
+    }));
+
+    console.log(JSON.stringify(parsed.days, null, 2));
     const itinerary = await saveItineraryService(req.user._id, parsed, extractedData.map((doc) => doc._id));
     successResponse(res, "Itinerary generated successfully", itinerary, 201);
+
   } catch (error) {
     console.error("Generate Itinerary Error:", error);
     errorResponse(res, error.message);
   }
 };
+
 
 export const getHistory = async (req, res) => {
   try {
